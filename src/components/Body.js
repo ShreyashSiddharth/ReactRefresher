@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { restaurantList } from "../constants";
 import Resturantcard from "./ResturantCard";
 
@@ -12,6 +12,17 @@ restaurant.data.name.includes(searchTxt)
 const Body = ()=>{
     const [searchTxt, setSearchTxt] = useState("");
     const [restaurants, setRestaurants] = useState(restaurantList);
+
+    useEffect(()=>{
+    getResturants();
+    },[]) // When dependency array is empty it will be called 1 time after initial render
+    //If you have a state vaariable in dependency array it will call callback function when value of state variable changes
+async function getResturants(){
+    const data = await fetch("https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
+    const json = await data.json();
+    console.log(json);
+    setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+}
 
     return(
        
