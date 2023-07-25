@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { restaurantList } from "../constants";
+
 import Resturantcard from "./ResturantCard";
+import Shimmer from "./Shimmer";
 
 function filterData(searchTxt , restaurants){
 return restaurants.filter((restaurant) => 
-restaurant.data.name.includes(searchTxt)
+restaurant.data.name.toLowerCase().includes(searchTxt.toLowerCase())
 );
 }
 
 
 const Body = ()=>{
+    const[allresturants,setAllresturants]  = useState([]);
     const [searchTxt, setSearchTxt] = useState("");
-    const [restaurants, setRestaurants] = useState(restaurantList);
+    const [restaurants, setRestaurants] = useState([]);
 
     useEffect(()=>{
     getResturants();
@@ -22,9 +24,10 @@ async function getResturants(){
     const json = await data.json();
     console.log(json);
     setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setAllresturants(json?.data?.cards[2]?.data?.data?.cards);
 }
 
-    return(
+    return(allresturants.length == 0)? <Shimmer/>:(
        
         <>
         <div className="search-container">
@@ -37,7 +40,7 @@ async function getResturants(){
             />
             <button className="search-btn" onClick={()=>{
                 //Data should be filtered
-                const data = filterData(searchTxt, restaurants);
+                const data = filterData(searchTxt, allresturants);
                 //State to be updated
                 setRestaurants(data);
 
@@ -46,9 +49,11 @@ async function getResturants(){
       
         <div className='resturant-list'>
         {
+           (restaurants.length == 0)? <h1>No Resturants Found</h1>: 
             restaurants.map((restaurant)=>{
-                return  <Resturantcard {...restaurant.data} key ={restaurant.data.id}/>
+                return <Resturantcard {...restaurant.data} key ={restaurant.data.id}/>
             })
+        
         }
        
         </div>
