@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 import Resturantcard from "./ResturantCard";
 import Shimmer from "./Shimmer";
@@ -52,9 +53,12 @@ const Body = ()=>{
       
         <div className='resturant-list'>
         {
-           (restaurants.length == 0)? <h1>No Resturants Found</h1>: 
+           (restaurants.length == 0)? <h1>No Resturants Found</h1>:
+            
             restaurants.map((restaurant)=>{
-                return <Resturantcard {...restaurant.info} key ={restaurant.info.id}/>
+                
+                return<Link to={"/resturant/" + restaurant.info.id }> <Resturantcard {...restaurant.info} key ={restaurant.info.id}/> </Link>
+               
             })
         
         }

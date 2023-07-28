@@ -8,6 +8,7 @@ import { createBrowserRouter , RouterProvider,Outlet} from 'react-router-dom';
 import About from './components/About';
 import Error from './components/Error';
 import Contact from './components/Contact';
+import RestaurantMenu from './components/ResturantMenu';
 
 
 
@@ -118,6 +119,11 @@ import Contact from './components/Contact';
                     element:<Contact/>,
         
                 },
+                {
+                    path:"/resturant/:id",
+                    element:<RestaurantMenu />,
+                    
+                },
             ],
         },
         
@@ -138,8 +144,8 @@ import Contact from './components/Contact';
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
-  
+    <React.StrictMode>
     <RouterProvider router={appRouter}/>
-    
+    </React.StrictMode>
  
     );
