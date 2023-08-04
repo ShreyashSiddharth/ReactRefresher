@@ -9,6 +9,7 @@ import About from './components/About';
 import Error from './components/Error';
 import Contact from './components/Contact';
 import RestaurantMenu from './components/ResturantMenu';
+import Profile from './components/Profile';
 
 
 
@@ -113,6 +114,12 @@ import RestaurantMenu from './components/ResturantMenu';
                 {
                     path:"/about",
                     element:<About/>,
+                    children:[
+                         {
+                            path:"profile",
+                            element:<Profile/>,
+                         }
+                ]
                 },
                 {
                     path:"/contact",
