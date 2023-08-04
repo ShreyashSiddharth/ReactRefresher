@@ -3,18 +3,21 @@ import { Link } from 'react-router-dom';
 
 import Resturantcard from "./ResturantCard";
 import Shimmer from "./Shimmer";
+import { filterData } from "../utils/Helper";
+import useOnline from "../utils/useOnline";
 
-function filterData(searchTxt , restaurants){
-return restaurants.filter((restaurant) => 
-restaurant.info.name.toLowerCase().includes(searchTxt.toLowerCase())
-);
-}
+
+
+
 
 
 const Body = ()=>{
     const[allresturants,setAllresturants]  = useState([]);
     const [searchTxt, setSearchTxt] = useState("");
     const [restaurants, setRestaurants] = useState([]);
+   
+
+
     async function getResturants(){
         const data = await fetch("https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.5940499&lng=85.1376051&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
@@ -29,6 +32,12 @@ const Body = ()=>{
     },[]) // When dependency array is empty it will be called 1 time after initial render
     //If you have a state vaariable in dependency array it will call callback function when value of state variable changes
     console.log(allresturants);
+
+    const offline = useOnline();
+    
+    if(offline){
+        return <h1>Offline please check your Internet Connection</h1>
+    }
 
     return(!allresturants || allresturants.length == 0)? <Shimmer/>:(
        
