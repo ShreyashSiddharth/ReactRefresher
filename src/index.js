@@ -1,17 +1,17 @@
-import React from 'react';
+import React,{lazy, Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import HeaderComponent2 from './components/HeaderComponent2';
 import Body from './components/Body';
 import Footer from './components/Footer';
 import { createBrowserRouter , RouterProvider,Outlet} from 'react-router-dom';
-import About from './components/About';
+// import About from './components/About';
 import Error from './components/Error';
 import Contact from './components/Contact';
 import RestaurantMenu from './components/ResturantMenu';
 import Profile from './components/Profile';
 
-
+const About = lazy(()=> import('./components/About'));
 
  /**
                  Header
@@ -113,7 +113,7 @@ import Profile from './components/Profile';
                 },
                 {
                     path:"/about",
-                    element:<About/>,
+                    element:<Suspense><About/></Suspense>,
                     children:[
                          {
                             path:"profile",

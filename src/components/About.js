@@ -1,9 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import useFavicon from "react-modify-favicon";
 
 
 const About  = () =>{
-  
+    useFavicon('https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196')
     return(
         
         <div>

@@ -6,8 +6,20 @@ const useOnline = () =>{
 const [isOffline , setIsOffline] = useState(false);
 
 useEffect(()=>{
-    window.addEventListener("online", () => {setIsOffline(false)});
-    window.addEventListener("offline", () => {setIsOffline(true)});
+    const hadleOnline = ()=>{
+        setIsOffline(false)
+    };
+
+    const hadleOffline = ()=>{
+        setIsOffline(true)
+    };
+    window.addEventListener("online", hadleOnline);
+    window.addEventListener("offline", hadleOffline);
+
+    return ()=>{
+        window.removeEventListener("online",hadleOnline);
+        window.removeEventListener("offline", hadleOffline);
+    };
 },[])
 
 return isOffline;
