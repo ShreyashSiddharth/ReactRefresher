@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 export const Title = () => (
     <h2 id = 'title' key="h2" >
         <img 
-        className='logo' style={{  width: '154px',
-            height: '76px'}}
+        className="h-28 pl-2"
         src= {TITLE_IMF}
         />
         </h2>
@@ -19,21 +18,21 @@ export const Title = () => (
   const [auth,setAuth] = useState(false);
   return (
        
-    <div className='header'> 
+    <div className='flex justify-between bg-blue-100 shadow-lg'> 
      <Title />
     <div className='nav-items'>
-     <ul>
-         <Link to="/"><li>Home</li></Link>
+     <ul className='flex py-10 px '>
+         <Link to="/"><li className='px-2 hover:underline hover:text-blue-600'>Home</li></Link>
          <Link to="/about">
-         <li>Aout Us</li>
+         <li className='px-2 hover:underline hover:text-blue-600'>Aout Us</li>
          </Link>
          <Link to="/contact">
-         <li>Contact</li>
+         <li className='px-2 hover:underline hover:text-blue-600'>Contact</li>
          </Link>
-         <li>Cart</li>
+         <li className='px-2'>Cart</li>
      </ul>
     </div>
-  { auth ? <button onClick={()=> setAuth(false)}>Logout</button>:<button onClick={()=> setAuth(true)}>Login</button>}
+  { auth ? <button  onClick={()=> setAuth(false)}>Logout</button>:<button onClick={()=> setAuth(true)}>Login</button>}
        
      </div>
  );

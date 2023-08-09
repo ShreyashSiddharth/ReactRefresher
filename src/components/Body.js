@@ -39,10 +39,14 @@ const Body = ()=>{
         return <h1>Offline please check your Internet Connection</h1>
     }
 
+    const buttonStyle = {
+        backgroundColor:"red",
+    };
+
     return(!allresturants || allresturants.length == 0)? <Shimmer/>:(
        
         <>
-        <div className="search-container">
+        <div className="p-5 bg-blue-50 my-3">
             <input 
             className="search-input" 
             type="text" 
@@ -50,7 +54,7 @@ const Body = ()=>{
             value={searchTxt}
             onChange={(e) => setSearchTxt(e.target.value)} 
             />
-            <button className="search-btn" onClick={()=>{
+            <button className="search-btn p-2 m-2 bg-green-800 text-white rounded-md hover:bg-green-950"  onClick={()=>{
                 //Data should be filtered
                 const data = filterData(searchTxt, allresturants);
                 //State to be updated
@@ -60,7 +64,7 @@ const Body = ()=>{
             }} >Search</button>
         </div>
       
-        <div className='resturant-list'>
+        <div className='flex flex-wrap'>
         {
            (restaurants.length == 0)? <h1>No Resturants Found</h1>:
             
