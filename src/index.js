@@ -10,6 +10,8 @@ import Error from './components/Error';
 import Contact from './components/Contact';
 import RestaurantMenu from './components/ResturantMenu';
 import Profile from './components/Profile';
+import { Provider } from 'react-redux';
+import { store } from './utils/Store';
 
 const About = lazy(()=> import('./components/About'));
 
@@ -93,11 +95,14 @@ const About = lazy(()=> import('./components/About'));
    
     const AppLayout = () =>{
         return(
-        <>
+
+        <Provider store ={store}>
+        
         <HeaderComponent2 />
        <Outlet/>
         <Footer />
-        </>
+        </Provider>
+    
         );
     };
 
